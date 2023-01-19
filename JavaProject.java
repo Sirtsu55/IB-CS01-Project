@@ -464,7 +464,7 @@ class JavaProject
             
             if(outFile.equals(""))
             {
-                scanner.close();break;
+                JavaProject.Close();
             }
             //query for settings file
             System.out.println("Enter a Settings name, or enter to exit");
