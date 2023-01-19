@@ -71,7 +71,7 @@ Breakdown of input:
 *   If a bizzare output dimention is provided as input, then the system can run out of memory to store the image
 
 ### Resource Management (level 3)
-*   Scanner is used to read from the file and always closed before exitting
+*   Scanner is used to read from the file and input. It is always closed before exitting
 *   BufferedImage is used to make an array to store the image
 *   After BufferedImage is created, the program will not exit mid-execution, ensuring the deletion of the memory and object
 *   All java objects will be destroyed with the Garbage collector
