@@ -453,7 +453,7 @@ class JavaProject
 
         
         
-        Scanner scanner = new Scanner(System.in);
+        JavaProject.scanner = new Scanner(System.in);
         
         while(true)
         {
