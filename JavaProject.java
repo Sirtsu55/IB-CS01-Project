@@ -445,33 +445,42 @@ class JavaProject
 
         //Create an raytracer with the settings file
         
-        Scanner scanner = new Scanner(System.in);
         
         
         while(true)
         {
             //query for output file
+            Scanner scanner = new Scanner(System.in);
+
             System.out.println("Enter an output file name, or enter to exit");
             String outFile = scanner.nextLine();
             
             if(outFile.equals(""))
-                break;
-            
+            {
+                scanner.close();break;
+            }
             //query for settings file
             System.out.println("Enter a Settings name, or enter to exit");
+
             String settings = scanner.nextLine();
             if(settings.equals(""))
+            {
+                scanner.close();
                 break;
+            }
 
+            //close the scanner
+            scanner.close();
+            
             RayTracer rt = new RayTracer(settings);
             //render the scene
             rt.RayTrace();
             //write the image to a file
             rt.WriteOut(outFile + ".png");
-            //wait for enter to be pressed
+
+            
         }
 
-        scanner.close();
     }
 
 

@@ -76,6 +76,7 @@ Breakdown of input:
 *   After BufferedImage is created, the program will not exit mid-execution, ensuring the deletion of the memory and object
 *   All java objects will be destroyed with the Garbage collector
 *   When a parsing error happens, the program will close the Scanner, before quitting the program
+*   The while loop inside main() will make sure the Scanner is closed before the program has the ability to exit with a parsing error
 
 ###
 
