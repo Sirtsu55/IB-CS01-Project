@@ -138,7 +138,7 @@ class RayTracer
         catch(Exception e)
         {
             System.out.println("Parsing Failed on " + state);
-            scanner.close(); System.exit(-1); 
+            scanner.close(); JavaProject.Close(); 
         }
         return 0.0;
     }
@@ -155,7 +155,7 @@ class RayTracer
         catch(Exception e)
         {
             System.out.println("Parsing Failed on " + state);
-            scanner.close(); System.exit(-1); 
+            scanner.close(); JavaProject.Close(); 
         }
         return -1;
     }
@@ -175,7 +175,7 @@ class RayTracer
         catch(Exception e)
         {
             System.out.println("Parsing Failed on " + state);
-            scanner.close(); System.exit(-1); 
+            scanner.close(); JavaProject.Close(); 
         }
         return new Vector3(0,0,0);
     }
@@ -190,7 +190,7 @@ class RayTracer
      if(!file.exists())
      {
         System.out.println("File does not exist");
-        System.exit(-1);
+        JavaProject.Close();
      }
 
      try
@@ -209,49 +209,49 @@ class RayTracer
             else 
             {
                 System.out.println("Parsing Failed on Sphere Color");
-                inp.close(); System.exit(-1); 
+                inp.close(); JavaProject.Close(); 
             }
             if(inp.hasNext() && inp.next().equals("SpherePosition"))
                 mSettings.SpherePosition = GetVector(inp, "Sphere Position");
             else 
             {
                 System.out.println("Parsing Failed on Sphere Position");
-                inp.close(); System.exit(-1); 
+                inp.close(); JavaProject.Close(); 
             }
             if(inp.hasNext() && inp.next().equals("SphereRadius"))
                 mSettings.SphereRadius = GetDouble(inp, "Sphere Radius");
             else
             {
                 System.out.println("Parsing Failed on Sphere Radius");
-                inp.close(); System.exit(-1); 
+                inp.close(); JavaProject.Close(); 
             }
             if(inp.hasNext() && inp.next().equals("CameraPosition"))
                 mSettings.CameraPosition = GetVector(inp, "Camera Position");
             else
             {
                 System.out.println("Parsing Failed on Camera Position");
-                inp.close(); System.exit(-1); 
+                inp.close(); JavaProject.Close(); 
             }
             if(inp.hasNext() && inp.next().equals("FocalLength"))
                 mSettings.FocalLength = GetDouble(inp, "Focal Length");
             else
             {
                 System.out.println("Parsing Failed on Focal Length");
-                inp.close(); System.exit(-1); 
+                inp.close(); JavaProject.Close(); 
             }
             if(inp.hasNext() && inp.next().equals("LightPosition"))
                 mSettings.LightPosition = GetVector(inp, "Light Position");
             else
             {
                 System.out.println("Parsing Failed on Light Position");
-                inp.close(); System.exit(-1); 
+                inp.close(); JavaProject.Close(); 
             }
             if(inp.hasNext() && inp.next().equals("LightIntensity"))
                 mSettings.LightIntensity = GetDouble(inp, "Light Intensity");
             else
             {
                 System.out.println("Parsing Failed on Light Intensity");
-                inp.close(); System.exit(-1); 
+                inp.close(); JavaProject.Close(); 
             }
             if(inp.hasNext() && inp.next().equals("Dimentions"))
             {
@@ -260,18 +260,18 @@ class RayTracer
                 if(mSettings.DimentionX <= 0)
                 {
                     System.out.println("Invalid Dimention X value");
-                    inp.close(); System.exit(-1); 
+                    inp.close(); JavaProject.Close(); 
                 }
                 if(mSettings.DimentionY <= 0)
                 {
                     System.out.println("Invalid Dimention Y value");
-                    inp.close(); System.exit(-1); 
+                    inp.close(); JavaProject.Close(); 
                 }
             }
             else
             {
                 System.out.println("Parsing Failed on Dimention");
-                System.exit(-1);
+                JavaProject.Close();
             }
             
         }
@@ -279,7 +279,7 @@ class RayTracer
         {
             //if the file is empty
             System.out.println("Parsing Failed " + file + "  is empty");
-            System.exit(-1);
+            JavaProject.Close();
         }
 
         inp.close();
@@ -288,7 +288,7 @@ class RayTracer
      catch(Exception e)
      {
         System.out.println("Parsing failed with unexpected error message: " + e.getMessage());
-        System.exit(-1);
+        JavaProject.Close();
      }
      return mSettings;
     }
@@ -439,18 +439,25 @@ class RayTracer
 class JavaProject
 {
    
+    public static Scanner scanner;
+
+    public static void Close()
+    {
+        if(scanner != null)
+            scanner.close();
+        System.exit(0);
+    }
 
     public static void main(String[] args) 
     {
 
-        //Create an raytracer with the settings file
         
         
+        Scanner scanner = new Scanner(System.in);
         
         while(true)
         {
             //query for output file
-            Scanner scanner = new Scanner(System.in);
 
             System.out.println("Enter an output file name, or enter to exit");
             String outFile = scanner.nextLine();
@@ -465,12 +472,8 @@ class JavaProject
             String settings = scanner.nextLine();
             if(settings.equals(""))
             {
-                scanner.close();
-                break;
+                JavaProject.Close();
             }
-
-            //close the scanner
-            scanner.close();
             
             RayTracer rt = new RayTracer(settings);
             //render the scene
