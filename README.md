@@ -8,12 +8,33 @@
 
 ## What does the program do?
 
-The program reads data of a scene with a sphere from a text file and processes it.
+The program reads data of a scene with a sphere from a text file that the user supplied and processes it.
 The program generates a ray-traced image of the described scene with a sphere. It stores the image in output.png, relative to where the program is executed.
+
+When asked an output file, enter a suitable name for the resulting png the program creates
+
+When asked an settings file, enter the name of the file that contains the settings
+
+The user can generate as many raytraced scenes as they want, with different settings files, because the program loops and asks again for the fields until the user hits enter, which will cause the program to close
+
+This fulfills the criteria
+>At least some of the data is read from the user or from a file using a loop
+
+Example input with provided files:
+
+    Enter an output file name, or enter to exit
+    >>outImage
+    Enter a Settings name, or enter to exit
+    >>Settings.txt
+
+This will generate a outImage.png with the raytraced image 
+and read the scene data from Settings.txt
+User input is denoted by `>>` 
+
 
 ### Data format
 
-There are data fields with a name and decimal/integer numbers seperated by a space eg.
+There are data fields in the settings file with a name and decimals/integers seperated by a space eg.
 
     SphereColor 1.0 1.0 1.0
     SpherePosition 0.0 0.0 -2.0
@@ -40,7 +61,7 @@ Breakdown of input:
 
 
 ### Error Handling (level 2 and 3)
-*   If the program cannot find a Settings.txt, it will report it and quit
+*   If the program cannot find the settings file supplied, it will report it and quit
 *   If an error happens while parsing the input file, it will inform the user, on which stage it went wrong and quits the program 
 *   If and unexpected error is caught while parsing, it will be caught and reported to the user
 *   The program expects the inputs to be in the order that is supplied the example settings, else a parsing error will be invoked
@@ -55,5 +76,7 @@ Breakdown of input:
 *   After BufferedImage is created, the program will not exit mid-execution, ensuring the deletion of the memory and object
 *   All java objects will be destroyed with the Garbage collector
 *   When a parsing error happens, the program will close the Scanner, before quitting the program
+
+###
 
 

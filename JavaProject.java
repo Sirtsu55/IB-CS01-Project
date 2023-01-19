@@ -278,7 +278,7 @@ class RayTracer
         else
         {
             //if the file is empty
-            System.out.println("Parsing Failed Settings.txt is empty");
+            System.out.println("Parsing Failed " + file + "  is empty");
             System.exit(-1);
         }
 
@@ -444,12 +444,34 @@ class JavaProject
     {
 
         //Create an raytracer with the settings file
-        RayTracer rt = new RayTracer("Settings.txt");
         
-        //render the scene
-        rt.RayTrace();
-        //write the image to a file
-        rt.WriteOut("output.png");
+        Scanner scanner = new Scanner(System.in);
+        
+        
+        while(true)
+        {
+            //query for output file
+            System.out.println("Enter an output file name, or enter to exit");
+            String outFile = scanner.nextLine();
+            
+            if(outFile.equals(""))
+                break;
+            
+            //query for settings file
+            System.out.println("Enter a Settings name, or enter to exit");
+            String settings = scanner.nextLine();
+            if(settings.equals(""))
+                break;
+
+            RayTracer rt = new RayTracer(settings);
+            //render the scene
+            rt.RayTrace();
+            //write the image to a file
+            rt.WriteOut(outFile + ".png");
+            //wait for enter to be pressed
+        }
+
+        scanner.close();
     }
 
 
