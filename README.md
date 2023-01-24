@@ -13,7 +13,7 @@ The program generates a ray-traced image of the described scene with a sphere. I
 
 When asked an output file, enter a suitable name for the resulting png the program creates
 
-When asked an settings file, enter the name of the file that contains the settings
+When asked an settings file, enter the relative path to the file that contains the settings
 
 The user can generate as many raytraced scenes as they want, with different settings files, because the program loops and asks again for the fields until the user hits enter, which will cause the program to close
 

@@ -445,7 +445,7 @@ class JavaProject
     {
         if(scanner != null)
             scanner.close();
-        System.exit(0);
+        System.exit(-1);
     }
 
     public static void main(String[] args) 
@@ -464,14 +464,16 @@ class JavaProject
             
             if(outFile.equals(""))
             {
+                System.out.println("Exiting");
                 JavaProject.Close();
             }
             //query for settings file
-            System.out.println("Enter a Settings name, or enter to exit");
+            System.out.println("Enter a Settings File, or enter to exit");
 
             String settings = scanner.nextLine();
             if(settings.equals(""))
             {
+                System.out.println("Exiting");
                 JavaProject.Close();
             }
             
@@ -481,11 +483,10 @@ class JavaProject
             //write the image to a file
             rt.WriteOut(outFile + ".png");
 
+            System.out.println("Written to " + outFile + ".png");
             
         }
 
     }
-
-
 
 }
