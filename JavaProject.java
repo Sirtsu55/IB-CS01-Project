@@ -6,6 +6,62 @@ import javax.imageio.ImageIO;
 
 import java.awt.image.BufferedImage;
 
+class JavaProject
+{
+   
+    public static Scanner scanner;
+
+    public static void Close(int code)
+    {
+        if(scanner != null)
+            scanner.close();
+        System.exit(code);
+    }
+
+    public static void main(String[] args) 
+    {
+
+        
+        
+        JavaProject.scanner = new Scanner(System.in);
+        
+        while(true)
+        {
+            //query for output file
+
+            System.out.println("Enter an output file name, or enter to exit");
+            String outFile = scanner.nextLine();
+            
+            if(outFile.equals(""))
+            {
+                System.out.println("Exiting");
+                JavaProject.Close(0);
+            }
+            //query for settings file
+            System.out.println("Enter a Settings File, or enter to exit");
+
+            String settings = scanner.nextLine();
+            if(settings.equals(""))
+            {
+                System.out.println("Exiting");
+                JavaProject.Close(0);
+            }
+            
+            RayTracer rt = new RayTracer(settings);
+            //render the scene
+            rt.RayTrace();
+            //write the image to a file
+            rt.WriteOut(outFile + ".png");
+
+            System.out.println("Written to " + outFile + ".png");
+            
+        }
+
+    }
+
+}
+
+
 //utility class to make storing 3d vectors easier 
 //and to make the math easier
 class Vector3
@@ -434,59 +490,4 @@ class RayTracer
         
 
     }
-}
-
-class JavaProject
-{
-   
-    public static Scanner scanner;
-
-    public static void Close(int code)
-    {
-        if(scanner != null)
-            scanner.close();
-        System.exit(code);
-    }
-
-    public static void main(String[] args) 
-    {
-
-        
-        
-        JavaProject.scanner = new Scanner(System.in);
-        
-        while(true)
-        {
-            //query for output file
-
-            System.out.println("Enter an output file name, or enter to exit");
-            String outFile = scanner.nextLine();
-            
-            if(outFile.equals(""))
-            {
-                System.out.println("Exiting");
-                JavaProject.Close(0);
-            }
-            //query for settings file
-            System.out.println("Enter a Settings File, or enter to exit");
-
-            String settings = scanner.nextLine();
-            if(settings.equals(""))
-            {
-                System.out.println("Exiting");
-                JavaProject.Close(0);
-            }
-            
-            RayTracer rt = new RayTracer(settings);
-            //render the scene
-            rt.RayTrace();
-            //write the image to a file
-            rt.WriteOut(outFile + ".png");
-
-            System.out.println("Written to " + outFile + ".png");
-            
-        }
-
-    }
-
 }
